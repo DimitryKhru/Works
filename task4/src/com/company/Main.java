@@ -8,20 +8,23 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
+        Scanner in = new Scanner(System.in);
+        String path = in.nextLine();
+        in.close();
 
-        String path = "C:\\Users\\DimaK\\OneDrive\\Рабочий стол\\Work2\\task4\\Num.txt";
-        File file = new File(path);
-        System.out.println(path);
-        Scanner scanner = new Scanner(file);
-        String line = scanner.nextLine();
-        String [] numString = line.split(" ");
-        int Nums[] = new int[numString.length];
-
-        for( int k = 0; k < numString.length; k++){
-            Nums[k] = Integer.parseInt(numString[k]);
+        Scanner scanner = new Scanner(new File(path));
+        int count = 0;
+        while (scanner.hasNextLine()) {
+            count++;
+            scanner.nextLine();
         }
 
-        System.out.println("Изначальный массив: " + Arrays.toString(Nums));
+        scanner = new Scanner(new File(path));
+        int Nums[] = new int[count];
+        for (int i = 0; i < Nums.length; i++) {
+            Nums[i] = scanner.nextInt();
+        }
+
         int[] ComparedValue = new int[Nums.length];
         int sum = Arrays.stream(Nums).sum() / Nums.length;
 
@@ -29,7 +32,6 @@ public class Main {
         for(Steps = 0; Steps < Nums.length; ++Steps) {
             ComparedValue[Steps] = sum;
         }
-
         Steps = 0;
 
         while(true) {
@@ -41,7 +43,6 @@ public class Main {
                     Nums[i]--;
                     ++Steps;
                 } else if (Arrays.equals(Nums, ComparedValue)) {
-                    System.out.println("Итог: " + Arrays.toString(Nums));
                     System.out.println( Steps);
                     return;
                 }

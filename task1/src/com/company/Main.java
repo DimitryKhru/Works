@@ -11,20 +11,19 @@ public class Main {
         for (int i = 0; i < Array.length; i++) {
             Array[i] = i + 1;
         }
-        System.out.println("Круговой массив: " + Arrays.toString(Array));
 
         int firstElement = 1;
-        int nextfirstElement = 0;
+        int nextFirstElement = 0;
         String path = String.valueOf(firstElement);
 
         while (true)
         {
 //записываем, какой элемент будет первым в следующий раз
-            nextfirstElement = Array[m - 1];
+            nextFirstElement = Array[m - 1];
 
 //проверяем, не пора ли заканчивать
-            if (firstElement == nextfirstElement) {
-                System.out.println("Путь: " + path);
+            if (firstElement == nextFirstElement) {
+                System.out.println(path);
                 break;
             } else {
 //запись пути
@@ -40,8 +39,6 @@ public class Main {
                 for (int i = 0; i < temp2Array.length; i++) {
                     Array[temp1Array.length + i] = temp2Array[i];
                 }
-
-                System.out.println("Новый круговой массив: " + Arrays.toString(Array));
             }
         }
     }
