@@ -1,28 +1,51 @@
 package com.company;
+
+import java.io.FileNotFoundException;
+import java.io.File;
 import java.util.Arrays;
+import java.util.Scanner;
+
 public class Main {
 
-    public static void main(String[] args) {
-        int [] nums = {1, 10, 2, 9};
-        int [] ComparedValue = new int[nums.length];
-        int sum = Arrays.stream(nums).sum() / nums.length;
-        for (int l = 0; l < nums.length; l++){
-            ComparedValue[l] = sum;
+    public static void main(String[] args) throws FileNotFoundException {
+
+        String path = "C:\\Users\\DimaK\\OneDrive\\Рабочий стол\\Work2\\task4\\Num.txt";
+        File file = new File(path);
+        System.out.println(path);
+        Scanner scanner = new Scanner(file);
+        String line = scanner.nextLine();
+        String [] numString = line.split(" ");
+        int Nums[] = new int[numString.length];
+
+        for( int k = 0; k < numString.length; k++){
+            Nums[k] = Integer.parseInt(numString[k]);
         }
-        int path = 0;
-        while (true)
-            for (int i = 0; i < nums.length; i++){
-                if (nums[i] < sum){
-                    nums[i] += 1;
-                    path += 1;
-                } else if (nums[i] > sum){
-                    nums[i] -= 1;
-                    path += 1;
-                } else if (Arrays.equals(nums, ComparedValue)){
-                    System.out.println(path);
+
+        System.out.println("Изначальный массив: " + Arrays.toString(Nums));
+        int[] ComparedValue = new int[Nums.length];
+        int sum = Arrays.stream(Nums).sum() / Nums.length;
+
+        int Steps;
+        for(Steps = 0; Steps < Nums.length; ++Steps) {
+            ComparedValue[Steps] = sum;
+        }
+
+        Steps = 0;
+
+        while(true) {
+            for(int i = 0; i < Nums.length; ++i) {
+                if (Nums[i] < sum) {
+                    Nums[i]++;
+                    ++Steps;
+                } else if (Nums[i] > sum) {
+                    Nums[i]--;
+                    ++Steps;
+                } else if (Arrays.equals(Nums, ComparedValue)) {
+                    System.out.println("Итог: " + Arrays.toString(Nums));
+                    System.out.println( Steps);
                     return;
                 }
             }
         }
     }
-
+}
